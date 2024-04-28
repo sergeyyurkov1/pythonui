@@ -1,0 +1,5 @@
+--prefer-binary
+
+textual
+textual-dev
+# pyinstaller

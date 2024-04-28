@@ -1,0 +1,9 @@
+#repl-evaluate {
+  width: auto;
+  height: auto;
+  /* background: red; */
+}
+#repl-output {
+  margin-top: 1;
+  margin-bottom: 1;
+}

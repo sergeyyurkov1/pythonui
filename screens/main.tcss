@@ -1,0 +1,14 @@
+#main-horizontalscroll {
+  width: 100%;
+  align: center middle;
+}
+.main-buttons {
+  border: solid #22ef45;
+  width: 25%;
+  height: 50%;
+}
+
+TextArea,
+Input {
+  border: none;
+}

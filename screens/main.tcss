@@ -1,0 +1,41 @@
+Header {
+  background: #ffb000;
+}
+
+#main-horizontalscroll {
+  width: 100%;
+  align: center middle;
+}
+.main-buttons {
+  border: solid #22ef45;
+  width: 20;
+  height: 100%;
+}
+.main-buttons:hover {
+  background: white;
+  border: blank white;
+  color: black;
+}
+.main-buttons:focus {
+  background: black;
+  border: blank white;
+  color: white;
+}
+.main-container-buttons {
+  width: 26;
+  height: 50%;
+  background: black 0%;
+
+  align: center middle;
+}
+.main-container-buttons:focus-within {
+  background: white;
+}
+
+.main-input {
+  margin-top: 1;
+}
+TextArea,
+Input {
+  border: none;
+}

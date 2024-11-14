@@ -1,0 +1,47 @@
+Screen {
+  padding: 1;
+}
+
+.center-middle {
+  align: center middle;
+}
+#label1 {
+  align: center middle;
+  color: #22ef45;
+}
+#label3 {
+  align: center middle;
+  color: #22ef45;
+}
+
+#progressbar {
+  align: center bottom;
+}
+#container {
+  max-width: 50%;
+}
+
+Bar > .bar--indeterminate {
+  color: #22ef45;
+}
+Bar > .bar--bar {
+  color: #22ef45;
+}
+PercentageStatus {
+  display: none;
+}
+ETAStatus {
+  display: none;
+}
+
+#open-loading {
+  width: 30;
+  height: 10;
+  background: #22ef45;
+  color: black;
+}
+
+Header {
+  background: #22ef45;
+  color: black;
+}

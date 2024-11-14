@@ -1,0 +1,4 @@
+--prefer-binary
+
+textual==0.85.2
+textual-dev

@@ -18,6 +18,8 @@ LAYOUT = {
 
 
 class Default(Screen):
+    TITLE = "PERSONAL TERMINAL"
+
     CSS_PATH = "main.tcss"
 
     BINDINGS = [("escape", "app.pop_screen", "Close")]

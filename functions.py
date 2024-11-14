@@ -13,8 +13,8 @@ def read_yaml(path: str = "settings.yaml") -> dict:
             return yaml.load(f)
 
     except FileNotFoundError:
-        print(f"{path} is not found. Exiting.")
-        sys.exit()
+        write_yaml({})
+        read_yaml()
 
 
 def write_yaml(

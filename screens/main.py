@@ -147,12 +147,10 @@ class Main(Screen):
                 )
                 os.system("cls")
             else:
+                command = f"clear && echo 'You are now in Terminal. Type <exit> ( <exit()> if in REPL ) or use <Ctrl+C> to return back to the UI.\n\nPlease wait...\n' && {command}"
                 if retro_effects:
                     command = f"cool-retro-term -e {command}"
-                os.system(
-                    "clear && echo 'You are now in Terminal. Type <exit> ( <exit()> if in REPL ) or use <Ctrl+C> to return back to the UI.\n\nPlease wait...\n' && "
-                    + command
-                )
+                os.system(command)
                 os.system("clear")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:

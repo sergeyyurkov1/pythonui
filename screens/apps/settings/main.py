@@ -70,3 +70,5 @@ class Default(Screen):
         config = functions.read_yaml() or {}
         config["retro_effects"] = event.switch.value
         functions.write_yaml(config)
+
+        self.notify("Saved.")

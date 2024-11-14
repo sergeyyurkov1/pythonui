@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# cool-retro-term --workdir "$HOME" -p Altair -e minicom
+cool-retro-term --workdir "$HOME" -p mhy.json -e python3 ~/pythonui/goodies/MatrixHasYou.py

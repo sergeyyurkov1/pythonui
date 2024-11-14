@@ -4,10 +4,17 @@ from textual.containers import Container, VerticalScroll
 from textual.screen import Screen
 from textual.widgets import Button, ContentSwitcher, Footer, Header, Static
 
+import functions
+
 from .about import layout as about_layout
+from .commands import layout as commands_layout
 from .monitoring import layout as monitoring_layout
 
-SETTINGS = {"About": about_layout, "Monitoring": monitoring_layout}
+LAYOUT = {
+    "About": about_layout,
+    "Monitoring": monitoring_layout,
+    "Commands": commands_layout,
+}
 
 
 class Default(Screen):
@@ -31,7 +38,7 @@ class Default(Screen):
                     self.id.upper().replace("_", " ").replace("-", " "), id="title"
                 )
             with VerticalScroll(id="settings-buttons"):
-                for k, _ in SETTINGS.items():
+                for k, _ in LAYOUT.items():
                     with Container(classes="settings-button-container"):
                         yield Button(
                             k,
@@ -40,11 +47,11 @@ class Default(Screen):
                             name="tabs",
                         )
 
-        initial = list(SETTINGS.keys())[0].lower().replace(" ", "-")
+        initial = list(LAYOUT.keys())[0].lower().replace(" ", "-")
         with ContentSwitcher(
             initial=f"settings-buttons-{initial}", id="settings-contentswitcher"
         ):
-            for k, v in SETTINGS.items():
+            for k, v in LAYOUT.items():
                 with VerticalScroll(
                     id=f"settings-buttons-{k.lower().replace(' ', '-')}",
                 ):
@@ -58,3 +65,8 @@ class Default(Screen):
             self.query_one(ContentSwitcher).current = event.button.id
         else:
             self.notify(event.button.name)
+
+    def on_switch_changed(self, event):
+        config = functions.read_yaml() or {}
+        config["retro_effects"] = event.switch.value
+        functions.write_yaml(config)

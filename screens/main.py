@@ -9,6 +9,8 @@ from textual.containers import Container, HorizontalScroll
 from textual.screen import ModalScreen, Screen
 from textual.widgets import Button, Footer, Header, Input
 
+import functions
+
 BIN_PATHS = [r"/usr/bin"]
 
 
@@ -130,6 +132,9 @@ class Main(Screen):
     def run_command(self, command) -> None:
         log_to_txt(f"Run '{command}'")
 
+        config = functions.read_yaml() or {}
+        retro_effects = config.get("retro_effects", False)
+
         with self.app_.suspend():
             # xinit -geometry =640x480+0+0 -fn 8x13 -j -fg white -bg black /usr/bin/<>
             # TODO: check if running inside WSL: uname -a
@@ -142,6 +147,8 @@ class Main(Screen):
                 )
                 os.system("cls")
             else:
+                if retro_effects:
+                    command = f"cool-retro-term -e {command}"
                 os.system(
                     "clear && echo 'You are now in Terminal. Type <exit> ( <exit()> if in REPL ) or use <Ctrl+C> to return back to the UI.\n\nPlease wait...\n' && "
                     + command

@@ -1,5 +1,7 @@
-from screens.main import Launcher
+import time
 
-bins = Launcher.get_bins([r"C:\Users\谢尔盖\Desktop\PUI Test"])
+import psutil
 
-print(bins)
+for i in range(30):
+    print([psutil.virtual_memory().percent])
+    time.sleep(1)

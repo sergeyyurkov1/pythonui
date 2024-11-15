@@ -1,4 +1,6 @@
-# from textual import events
+import random
+
+from textual import on
 from textual.app import ComposeResult
 from textual.containers import Container, VerticalScroll
 from textual.screen import Screen
@@ -7,8 +9,11 @@ from textual.widgets import Button, ContentSwitcher, Footer, Header, Static
 import functions
 
 from .about import layout as about_layout
+from .commands import Switch_Changed
 from .commands import layout as commands_layout
 from .monitoring import layout as monitoring_layout
+
+random.seed(73)
 
 LAYOUT = {
     "About": about_layout,
@@ -45,8 +50,7 @@ class Default(Screen):
                         yield Button(
                             k,
                             id=f"settings-buttons-{k.lower().replace(' ', '-')}",
-                            classes="settings-buttons",
-                            name="tabs",
+                            classes="role-contentswitcher settings-buttons",  # "role-" widget classes are not for styling, they are handler function selectors
                         )
 
         initial = list(LAYOUT.keys())[0].lower().replace(" ", "-")
@@ -62,15 +66,21 @@ class Default(Screen):
 
         yield Footer()
 
+    @on(Button.Pressed, ".role-contentswitcher")
     def on_button_pressed(self, event: Button.Pressed) -> None:
-        if event.button.name == "tabs":
-            self.query_one(ContentSwitcher).current = event.button.id
-        else:
-            self.notify(event.button.name)
+        self.query_one(ContentSwitcher).current = event.button.id
 
-    def on_switch_changed(self, event):
-        config = functions.read_yaml() or {}
-        config["retro_effects"] = event.switch.value
+    @on(Switch_Changed, ".role-settings")
+    def handle_switch_change(self, event):
+        config = functions.read_yaml()
+        config[event.switch.name] = event.switch.value
         functions.write_yaml(config)
 
         self.notify("Saved.")
+
+    def on_mount(self) -> None:
+        self.set_interval(2, self.update_plots)
+
+    def update_plots(self) -> None:
+        for plot in self.query(".role-plotextplot"):
+            plot.update()

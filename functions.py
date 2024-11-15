@@ -10,7 +10,7 @@ yaml.default_flow_style = False
 def read_yaml(path: str = "settings.yaml") -> dict:
     try:
         with open(path, "r", encoding="utf-8") as f:
-            return yaml.load(f)
+            return yaml.load(f) or {}
 
     except FileNotFoundError:
         write_yaml({})

@@ -2,4 +2,6 @@
 
 textual==0.85.2
 textual-dev
+textual-plotext
 ruamel.yaml
+psutil

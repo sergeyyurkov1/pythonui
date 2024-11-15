@@ -148,7 +148,7 @@ class Main(Screen):
                 os.system("cls")
             else:
                 if retro_effects:
-                    command = f"cool-retro-term -p Futuristic -e {command}"
+                    command = f'cool-retro-term --profile "Futuristic" -e {command}'
                 command = f"clear && echo 'You are now in Terminal. Type <exit> ( <exit()> if in REPL ) or use <Ctrl+C> to return back to the UI.\n\nPlease wait...\n' && {command}"
                 os.system(command)
                 os.system("clear")

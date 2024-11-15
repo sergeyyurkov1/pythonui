@@ -14,11 +14,6 @@ import functions
 BIN_PATHS = [r"/usr/bin"]
 
 
-def log_to_txt(text: str) -> None:
-    with open("log.txt", "a") as f:
-        f.write(text + "\n")
-
-
 class Launcher(ModalScreen[str]):
     BINDINGS = [
         Binding(key="escape", action="app.pop_screen"),
@@ -130,10 +125,9 @@ class Main(Screen):
         self.query_one("#command").focus()
 
     def run_command(self, command) -> None:
-        log_to_txt(f"Run '{command}'")
+        functions.log_to_txt(f"Run '{command}'")
 
-        config = functions.read_yaml() or {}
-        retro_effects = config.get("retro_effects", False)
+        retro_effects = functions.read_yaml().get("retro_effects", False)
 
         with self.app_.suspend():
             # xinit -geometry =640x480+0+0 -fn 8x13 -j -fg white -bg black /usr/bin/<>

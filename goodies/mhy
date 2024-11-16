@@ -1,4 +1,3 @@
 #!/bin/sh
 
-# cool-retro-term --workdir "$HOME" -p Altair -e minicom
 cool-retro-term --workdir "$HOME" --profile "Monochrome Green" -e python3 ~/pythonui/goodies/MatrixHasYou.py

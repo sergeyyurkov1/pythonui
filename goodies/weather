@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cool-retro-term --workdir "$HOME" --profile "Futuristic" -e wget -O- -q wttr.in

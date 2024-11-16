@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo 'permit nopass pui cmd reboot' >> /etc/doas.conf
+echo 'permit nopass pui cmd poweroff' >> /etc/doas.conf

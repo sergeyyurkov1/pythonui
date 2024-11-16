@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo 'alias reboot="doas reboot"' > ~/.profile
+echo 'alias poweroff="doas poweroff"' > ~/.profile

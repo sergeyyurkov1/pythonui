@@ -1,5 +1,6 @@
 import glob
 import os
+import pathlib
 import platform
 
 from textual import on
@@ -52,9 +53,10 @@ class Launcher(ModalScreen[str]):
     def get_bins(paths: list) -> list[dict]:
         bins = []
         for path in paths:
-            for path in glob.glob(os.path.join(path, "*")):
-                name = os.path.basename(path)  # .split(".")[0]
-                bins.append({"name": name, "path": path})
+            for p in glob.glob(os.path.join(path, "*")):
+                if not pathlib.Path(p).is_symlink():
+                    name = os.path.basename(p)  # .split(".")[0]
+                    bins.append({"name": name, "path": p})
 
         return sorted(bins, key=lambda x: x["name"])
 
@@ -64,8 +66,6 @@ class Launcher(ModalScreen[str]):
 
 
 class Main(Screen):
-    TITLE = "PERSONAL TERMINAL"
-
     CSS_PATH = "main.tcss"
 
     BINDINGS = [
@@ -80,7 +80,7 @@ class Main(Screen):
         self.app_ = app
 
     def compose(self) -> ComposeResult:
-        yield Header(show_clock=True, icon="")  # ⬔
+        yield Header(show_clock=True, icon="▮▮▮")  # ▮▮▮
 
         with HorizontalScroll(id="main-horizontalscroll"):
             for i in self.app_.user_screens:

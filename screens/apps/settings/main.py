@@ -23,8 +23,6 @@ LAYOUT = {
 
 
 class Default(Screen):
-    TITLE = "PERSONAL TERMINAL"
-
     CSS_PATH = "main.tcss"
 
     BINDINGS = [("escape", "app.pop_screen", "Close")]
@@ -79,6 +77,7 @@ class Default(Screen):
         self.notify("Saved.")
 
     def on_mount(self) -> None:
+        # self.sub_title =
         self.set_interval(2, self.update_plots)
 
     def update_plots(self) -> None:

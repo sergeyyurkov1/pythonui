@@ -20,6 +20,8 @@ COMMANDS_PATH = os.path.join(
     os.path.realpath(os.path.dirname(__file__)), "screens", "commands"
 )
 
+TITLE = "PERSONAL TERMINAL"
+
 
 class PersonalTerminal(App):
     ENABLE_COMMAND_PALETTE = False
@@ -27,6 +29,8 @@ class PersonalTerminal(App):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.title = TITLE
 
         self.user_screens = self.get_user_screens()
         self.user_subscreens = self.get_user_subscreens()

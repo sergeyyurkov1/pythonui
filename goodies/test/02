@@ -1,4 +1,13 @@
 #!/bin/sh
 
-echo 'alias reboot="doas reboot"' > ~/.profile
-echo 'alias poweroff="doas poweroff"' > ~/.profile
+# echo 'alias reboot="doas reboot"' > ~/.profile
+# echo 'alias poweroff="doas poweroff"' > ~/.profile
+
+apk update
+apk add virtualbox-guest-additions virtualbox-guest-additions-x11 xf86-video-vboxvideo
+
+rc-service virtualbox-guest-additions start
+rc-update add virtualbox-guest-additions boot
+
+rc-service virtualbox-drm-client start
+rc-update add virtualbox-drm-client default

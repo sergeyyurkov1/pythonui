@@ -5,3 +5,4 @@ textual-dev
 textual-plotext
 ruamel.yaml
 psutil
+i3ipc

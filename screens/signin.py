@@ -1,4 +1,4 @@
-from textual.app import ComposeResult
+from textual.app import ComposeResult, on
 from textual.containers import Container
 from textual.screen import Screen
 from textual.widgets import Button
@@ -26,3 +26,9 @@ class SignIn(Screen):
 
     def on_mount(self) -> None:
         self.animate()
+
+    @on(Button.Pressed, "#open-loading")
+    def open_loading(self) -> None:
+        self.app.pop_screen()
+        self.app.push_screen("loading")
+        self.app.uninstall_screen("signin")

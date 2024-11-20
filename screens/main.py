@@ -8,10 +8,11 @@ from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Container, HorizontalScroll
 from textual.screen import ModalScreen, Screen
-from textual.widgets import Button, Footer, Input
+from textual.widgets import Button, Footer, Header, Input
 
 import functions
-from widgets.header import PtHeader
+
+# from widgets.header import PtHeader
 
 BIN_PATHS = [r"/usr/bin"]
 
@@ -79,7 +80,8 @@ class Main(Screen):
         super().__init__(*args, **kwargs)
 
     def compose(self) -> ComposeResult:
-        yield PtHeader()
+        # yield PtHeader()
+        yield Header(show_clock=True, icon="▮▮▮")
 
         with HorizontalScroll(id="main-horizontalscroll"):
             for i in self.app.user_screens:

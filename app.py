@@ -1,12 +1,9 @@
 import glob
 import importlib
 import os
-import threading
 from importlib.machinery import SourceFileLoader
 
-from textual import on
 from textual.app import App
-from textual.widgets import Button
 
 import clean
 from screens.loading import Loading
@@ -98,22 +95,9 @@ class PersonalTerminal(App):
         self.install_screen(Loading(id="loading"), name="loading")
         self.install_screen(Main(id="main"), name="main")
 
-        self.push_screen("main")
-        self.push_screen("loading")
         self.push_screen("signin")
 
         self.install_user_screens()
-
-    @on(Button.Pressed, "#open-loading")
-    def open_main(self) -> None:
-        self.pop_screen()
-        self.uninstall_screen("signin")
-        self.timer = threading.Timer(5, self.pop_screen_handler).start()
-
-    def pop_screen_handler(self):
-        self.pop_screen()
-        self.timer.cancel()
-        self.uninstall_screen("loading")
 
 
 if __name__ == "__main__":

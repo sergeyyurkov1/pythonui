@@ -29,13 +29,17 @@ class Loading(Screen):
         Loading {
             background: black;
         }
+
+        Bar > .bar--complete {
+            color: #22ef45;
+        }
     """
 
     def compose(self) -> ComposeResult:
         yield Container(
             Container(
                 Container(Label(label1), id="label1"),
-                Container(ProgressBar(), id="progressbar"),
+                Container(ProgressBar(total=100), id="progressbar"),
                 # Container(SpinnerWidget(), id="progressbar"),
                 Container(Label(label3), id="label3"),
                 classes="center-middle",
@@ -43,3 +47,16 @@ class Loading(Screen):
             ),
             classes="center-middle",
         )
+
+    def on_mount(self) -> None:
+        self.timer = self.set_interval(1, self.progressbar_handler)
+
+    def progressbar_handler(self) -> None:
+        pb = self.query_one(ProgressBar)
+        if pb.progress < 100:
+            pb.advance(25)
+        else:  # open Main
+            self.timer.stop()
+            self.app.pop_screen()
+            self.app.push_screen("main")
+            self.app.uninstall_screen("loading")

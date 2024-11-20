@@ -1,0 +1,3 @@
+#!/bin/sh
+
+doas echo -e "/home/pui/pythonui/i3py &\n$(cat /home/pui/.xinitrc)" > /home/pui/.xinitrc

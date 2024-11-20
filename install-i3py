@@ -1,7 +1,9 @@
 #!/bin/sh
 
-cp /home/pui/.xinitrc /home/pui/.xinitrc.b
+if ! grep -q "i3py" /home/pui/.xinitrc; then
+    cp /home/pui/.xinitrc /home/pui/.xinitrc.b
 
-echo '/home/pui/pythonui/i3py &' > /tmp/.xinitrc
-cat /home/pui/.xinitrc >> /tmp/.xinitrc
-cp /tmp/.xinitrc /home/pui/.xinitrc
+    echo '/home/pui/pythonui/i3py &' > /tmp/.xinitrc
+    cat /home/pui/.xinitrc >> /tmp/.xinitrc
+    cp /tmp/.xinitrc /home/pui/.xinitrc
+fi

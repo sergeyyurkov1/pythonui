@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# cd ~
+
+# doas apk update
+
+doas apk add nano python3 py3-pip mc lynx busybox-extras cool-retro-term
+
+doas apk add gcc python3-dev musl-dev linux-headers
+
+doas apk add virtualbox-guest-additions virtualbox-guest-additions-x11
+doas rc-service virtualbox-guest-additions start
+doas rc-update add virtualbox-guest-additions boot
+doas rc-service virtualbox-drm-client start
+doas rc-update add virtualbox-drm-client default
+
+# PulseAudio
+# doas apk add pulseaudio pulseaudio-alsa
+# doas apk add alsa-plugins-pulse
+# doas apk add pavucontrol
+
+python3 -m pip install --upgrade pip venv
+
+# rm -rf pythonui
+
+# git clone https://github.com/sergeyyurkov1/pythonui
+
+doas cp ~/pythonui/pui /usr/local/bin/
+doas chmod +x /usr/local/bin/pui
+
+python3 -m venv ~/pythonui/.venv
+source ~/pythonui/.venv/bin/activate
+
+python3 -m pip install -r ~/pythonui/requirements.txt
+
+# hide
+if ! grep -q "mode invisible" ~/.config/i3/config; then
+	sed -i "$(( $(wc -l <~/.config/i3/config)-3+1 )),$ d" ~/.config/i3/config
+	echo -e "bar {\n    mode invisible\n    status_command i3status\n}" >> ~/.config/i3/config
+fi
+
+if ! grep -q 'exec_always --no-startup-id "xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar"' ~/.config/i3/config; then
+	echo 'exec_always --no-startup-id "xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar"' >> ~/.config/i3/config
+fi
+
+# if ! grep -q 'for_window [class=".*"] border none' ~/.config/i3/config; then
+if ! grep -q "] border none" ~/.config/i3/config; then
+	echo 'for_window [class=".*"] border none' >> ~/.config/i3/config
+fi
+
+if ! grep -q "] fullscreen enable" ~/.config/i3/config; then
+	echo 'for_window [title="cool-retro-term"] fullscreen enable' >> ~/.config/i3/config
+fi
+
+sed -i "s/i3-sensible-terminal/xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar/" ~/.config/i3/config
+
+source ~/pythonui/install-i3py

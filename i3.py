@@ -19,6 +19,8 @@ def main():
 
     i3.on(Event.WINDOW_CLOSE, on_window_close)
 
+    i3.main()
+
 
 if __name__ == "__main__":
     main()

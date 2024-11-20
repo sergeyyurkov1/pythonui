@@ -96,7 +96,7 @@ class PersonalTerminal(App):
     def on_mount(self) -> None:
         self.install_screen(SignIn(id="signin"), name="signin")
         self.install_screen(Loading(id="loading"), name="loading")
-        self.install_screen(Main(self, id="main"), name="main")
+        self.install_screen(Main(id="main"), name="main")
 
         self.push_screen("main")
         self.push_screen("loading")

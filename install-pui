@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# cd ~
-
-# doas apk update
-
 doas apk add nano python3 py3-pip mc lynx busybox-extras cool-retro-term
 
 doas apk add gcc python3-dev musl-dev linux-headers
@@ -20,10 +16,6 @@ doas rc-update add virtualbox-drm-client default
 # doas apk add pavucontrol
 
 python3 -m pip install --upgrade pip venv
-
-# rm -rf pythonui
-
-# git clone https://github.com/sergeyyurkov1/pythonui
 
 doas cp ~/pythonui/pui /usr/local/bin/
 doas chmod +x /usr/local/bin/pui

@@ -8,9 +8,10 @@ from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Container, HorizontalScroll
 from textual.screen import ModalScreen, Screen
-from textual.widgets import Button, Footer, Header, Input
+from textual.widgets import Button, Footer, Input
 
 import functions
+from widgets.header import PtHeader
 
 BIN_PATHS = [r"/usr/bin"]
 
@@ -74,16 +75,14 @@ class Main(Screen):
         Binding(key="q", action="app.quit", description="Quit"),
     ]
 
-    def __init__(self, app, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.app_ = app
-
     def compose(self) -> ComposeResult:
-        yield Header(show_clock=True, icon="▮▮▮")  # ▮▮▮
+        yield PtHeader()
 
         with HorizontalScroll(id="main-horizontalscroll"):
-            for i in self.app_.user_screens:
+            for i in self.app.user_screens:
                 yield Container(
                     Button(
                         i.upper().replace("_", " ").replace("-", " "),
@@ -94,7 +93,7 @@ class Main(Screen):
                     classes="main-container-buttons",
                     id=f"main-button-{i}",
                 )
-            for e, i in enumerate(self.app_.user_commands):
+            for e, i in enumerate(self.app.user_commands):
                 yield Container(
                     Button(
                         i["name"].upper().replace("_", " ").replace("-", " "),
@@ -112,7 +111,7 @@ class Main(Screen):
 
     # =================================================================================
     def action_open_launcher(self) -> None:
-        self.app_.push_screen(Launcher(), self.run_command)
+        self.app.push_screen(Launcher(), self.run_command)
 
     @on(Input.Submitted)
     def handle_input_submitted(self, event: Input.Submitted):
@@ -129,7 +128,7 @@ class Main(Screen):
 
         retro_effects = functions.read_yaml().get("retro_effects", False)
 
-        with self.app_.suspend():
+        with self.app.suspend():
             # xinit -geometry =640x480+0+0 -fn 8x13 -j -fg white -bg black /usr/bin/<>
             # TODO: check if running inside WSL: uname -a
             # $ startx /usr/bin/<> -- -br +bs -dpi 96
@@ -149,7 +148,7 @@ class Main(Screen):
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.name == "screens":
-            self.app_.push_user_screen(event.button.id)
+            self.app.push_user_screen(event.button.id)
 
         if "command" in event.button.id:
             self.run_command(event.button.name)

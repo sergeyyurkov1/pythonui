@@ -4,9 +4,10 @@ from textual import on
 from textual.app import ComposeResult
 from textual.containers import Container, VerticalScroll
 from textual.screen import Screen
-from textual.widgets import Button, ContentSwitcher, Footer, Header, Static
+from textual.widgets import Button, ContentSwitcher, Footer, Static
 
 import functions
+from widgets.header import PtHeader
 
 from .about import layout as about_layout
 from .commands import Switch_Changed
@@ -19,6 +20,7 @@ LAYOUT = {
     "About": about_layout,
     "Monitoring": monitoring_layout,
     "Commands": commands_layout,
+    "Test": [],
 }
 
 
@@ -35,7 +37,7 @@ class Default(Screen):
     #         await self.run_action("set_background('red')")
 
     def compose(self) -> ComposeResult:
-        yield Header(show_clock=True, icon="")
+        yield PtHeader()
 
         with Container(id="col1"):
             with Container():

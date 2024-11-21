@@ -20,21 +20,14 @@ LAYOUT = {
     "About": about_layout,
     "Monitoring": monitoring_layout,
     "Commands": commands_layout,
-    "Test": [],
+    # "Test": [],
 }
 
 
-class Default(Screen):
+class Default(Screen, functions.SettingsMixin):
     CSS_PATH = "main.tcss"
 
     BINDINGS = [("escape", "app.pop_screen", "Close")]
-
-    # def action_set_background(self, color: str) -> None:
-    #     self.screen.styles.background = color
-
-    # async def on_key(self, event: events.Key) -> None:
-    #     if event.key == "r":
-    #         await self.run_action("set_background('red')")
 
     def compose(self) -> ComposeResult:
         # yield PtHeader()
@@ -70,17 +63,17 @@ class Default(Screen):
     @on(Button.Pressed, ".role-contentswitcher")
     def on_button_pressed(self, event: Button.Pressed) -> None:
         self.query_one(ContentSwitcher).current = event.button.id
+        self.sub_title = str(event.button.label).upper()
 
     @on(Switch_Changed, ".role-settings")
     def handle_switch_change(self, event):
-        config = functions.read_yaml()
-        config[event.switch.name] = event.switch.value
-        functions.write_yaml(config)
+        self.write_settings(event.switch.name, event.switch.value)
 
-        self.notify("Saved.")
+        # self.notify("Saved.")
 
     def on_mount(self) -> None:
-        # self.sub_title =
+        # self.sub_title = self.namespace.upper().replace("_", " ").replace("-", " ")
+        self.query_one("#retro_effects").value = self.read_settings("retro_effects")
         self.set_interval(2, self.update_plots)
 
     def update_plots(self) -> None:

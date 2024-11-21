@@ -6,6 +6,7 @@ from importlib.machinery import SourceFileLoader
 from textual.app import App
 
 import clean
+from functions import register_namespace
 from screens.loading import Loading
 from screens.main import Main
 from screens.signin import SignIn
@@ -83,6 +84,8 @@ class PersonalTerminal(App):
             screen_module = importlib.import_module(f"screens.apps.{i}.main")
             screen = getattr(screen_module, "Default")
             self.install_screen(screen(id=i), name=i)
+
+            register_namespace(i)
 
     def push_user_screen(self, name):
         self.push_screen(name)

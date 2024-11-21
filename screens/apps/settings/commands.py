@@ -1,8 +1,6 @@
 from textual.containers import Container, Horizontal
 from textual.widgets import Static, Switch
 
-import functions
-
 Switch_Changed = Switch.Changed
 
 layout = [
@@ -10,7 +8,7 @@ layout = [
         Horizontal(
             Static("Retro effects", classes="commands-static"),
             Switch(
-                value=functions.read_yaml().get("retro_effects", False),
+                id="retro_effects",
                 name="retro_effects",
                 classes="role-settings",
             ),

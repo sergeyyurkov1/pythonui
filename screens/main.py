@@ -1,7 +1,6 @@
 import glob
 import os
 import pathlib
-import platform
 
 from textual import on
 from textual.app import ComposeResult
@@ -67,7 +66,7 @@ class Launcher(ModalScreen[str]):
             yield Button(i["name"], name=i["path"])
 
 
-class Main(Screen):
+class Main(Screen, functions.SettingsMixin):
     CSS_PATH = "main.tcss"
 
     BINDINGS = [
@@ -126,27 +125,21 @@ class Main(Screen):
         self.query_one("#command").focus()
 
     def run_command(self, command) -> None:
-        functions.log_to_txt(f"Run '{command}'")
+        # retro_effects = self.read_settings("retro_effects", "settings")
+        retro_effects = self.search_key("retro_effects")
 
-        retro_effects = functions.read_yaml().get("retro_effects", False)
+        functions.log_to_txt(f"Run '{command}', retro_effects: {retro_effects}")
 
         with self.app.suspend():
             # xinit -geometry =640x480+0+0 -fn 8x13 -j -fg white -bg black /usr/bin/<>
             # TODO: check if running inside WSL: uname -a
             # $ startx /usr/bin/<> -- -br +bs -dpi 96
             # --mode 800x600
-            if platform.system() == "Windows":
-                os.system(
-                    "cls && echo 'You are now in Terminal. Type <exit> ( <exit()> if in REPL ) or use <Ctrl+C> to return back to the UI.\n\nPlease wait...\n' && "
-                    + command
-                )
-                os.system("cls")
-            else:
-                if retro_effects:
-                    command = f'cool-retro-term --profile "Futuristic" -e {command}'
-                command = f"clear && echo 'You are now in Terminal. Type <exit> ( <exit()> if in REPL ) or use <Ctrl+C> to return back to the UI.\n\nPlease wait...\n' && {command}"
-                os.system(command)
-                os.system("clear")
+            if retro_effects:
+                command = f'cool-retro-term --profile "Futuristic" -e {command}'
+            command = f"clear && echo 'You are now in Terminal. Type <exit> ( <exit()> if in REPL ) or use <Ctrl+C> to return back to the UI.\n\nPlease wait...\n' && {command}"
+            os.system(command)
+            os.system("clear")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.name == "screens":

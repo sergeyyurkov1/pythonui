@@ -6,7 +6,7 @@ from textual.containers import Container, VerticalScroll
 from textual.screen import Screen
 from textual.widgets import Button, ContentSwitcher, Footer, Header, Static
 
-import functions
+from api.v1 import SettingsMixin
 
 # from widgets.header import PtHeader
 from .about import layout as about_layout
@@ -24,7 +24,7 @@ LAYOUT = {
 }
 
 
-class Default(Screen, functions.SettingsMixin):
+class Default(Screen, SettingsMixin):
     CSS_PATH = "main.tcss"
 
     BINDINGS = [("escape", "app.pop_screen", "Close")]

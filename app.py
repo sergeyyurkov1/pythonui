@@ -6,7 +6,7 @@ from importlib.machinery import SourceFileLoader
 from textual.app import App
 
 import clean
-from functions import register_namespace
+from functions import SettingsMixin, register_namespace
 from screens.loading import Loading
 from screens.main import Main
 from screens.signin import SignIn
@@ -21,7 +21,7 @@ COMMANDS_PATH = os.path.join(
 TITLE = "PERSONAL TERMINAL"
 
 
-class PersonalTerminal(App):
+class PersonalTerminal(App, SettingsMixin):
     ENABLE_COMMAND_PALETTE = False
     CSS_PATH = "app.tcss"
 
@@ -98,7 +98,10 @@ class PersonalTerminal(App):
         self.install_screen(Loading(id="loading"), name="loading")
         self.install_screen(Main(id="main"), name="main")
 
-        self.push_screen("signin")
+        if self.search_key("disable_splashscreens") is False:
+            self.push_screen("signin")
+        else:
+            self.push_screen("main")
 
         self.install_user_screens()
 

@@ -1,2 +1,3 @@
 settings:
   retro_effects: true
+disable_splashscreens: true # false

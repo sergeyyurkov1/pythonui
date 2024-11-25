@@ -1,19 +1,19 @@
-from rich import box, print
+from rich import print
 from rich.table import Table
 
-table = Table(box=box.MINIMAL)  # box=None, MINIMAL_DOUBLE_HEAD
+table = Table(box=None)  # box=MINIMAL
 
-table.add_column(style="on blue")  # style="magenta"
+table.add_column(style="on blue")
 
 text = """
-    [bold]Python OS[/bold]                      
+    [bold]Python OS[/bold]                         
 
-    Type [b]pui[/b] to enter Python UI          
+    Type [b]pui[/b] to enter Python UI             
 
-    For help please visit Python OS Github page 
+    For help please visit Python OS Github page    
 
-    HAVE FUN!                                   
-    The Python OS Developer                     
+    HAVE FUN!                                      
+    The Python OS Developer                        
 
 """
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-doas apk add nano python3 py3-pip mc lynx busybox-extras cool-retro-term
+doas apk add nano python3 py3-pip py3-rich mc lynx busybox-extras cool-retro-term
 
 doas apk add gcc python3-dev musl-dev linux-headers
 
@@ -32,8 +32,8 @@ if ! grep -q "mode invisible" ~/.config/i3/config; then
 fi
 
 # --command ~/pythonui/pos-greeter
-if ! grep -q 'exec_always --no-startup-id "xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar"' ~/.config/i3/config; then
-	echo 'exec_always --no-startup-id "xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar"' >> ~/.config/i3/config
+if ! grep -q 'exec_always --no-startup-id alacritty' ~/.config/i3/config; then
+	echo 'exec_always --no-startup-id alacritty' >> ~/.config/i3/config
 fi
 
 # if ! grep -q 'for_window [class=".*"] border none' ~/.config/i3/config; then
@@ -45,6 +45,7 @@ if ! grep -q "] fullscreen enable" ~/.config/i3/config; then
 	echo 'for_window [title="cool-retro-term"] fullscreen enable' >> ~/.config/i3/config
 fi
 
-sed -i "s/i3-sensible-terminal/xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar/" ~/.config/i3/config
+# xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar
+sed -i "s/i3-sensible-terminal/alacritty/" ~/.config/i3/config
 
 source ~/pythonui/install-i3py

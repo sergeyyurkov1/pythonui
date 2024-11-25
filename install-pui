@@ -48,7 +48,7 @@ fi
 # xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar
 sed -i "s/i3-sensible-terminal/alacritty/" ~/.config/i3/config
 
-echo '[general]' > $HOME/.alacritty.toml
+echo '[window]' > $HOME/.alacritty.toml
 echo 'dynamic_title = false' >> $HOME/.alacritty.toml
 
 source ~/pythonui/install-i3py

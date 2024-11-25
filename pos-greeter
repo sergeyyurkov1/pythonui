@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd ~/pythonui
+
+source .venv/bin/activate
+
+clear
+
+python3 pos-greeter.py

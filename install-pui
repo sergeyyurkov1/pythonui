@@ -32,7 +32,7 @@ if ! grep -q "mode invisible" ~/.config/i3/config; then
 fi
 
 if ! grep -q 'exec_always --no-startup-id "xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar"' ~/.config/i3/config; then
-	echo 'exec_always --no-startup-id "xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar"' >> ~/.config/i3/config
+	echo 'exec_always --no-startup-id "xfce4-terminal --hide-menubar --hide-toolbar --hide-scrollbar --command ~/pythonui/pos-greeter"' >> ~/.config/i3/config
 fi
 
 # if ! grep -q 'for_window [class=".*"] border none' ~/.config/i3/config; then

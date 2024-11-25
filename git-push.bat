@@ -9,6 +9,7 @@ call git add --chmod=+x ./goodies/test/02
 call git add --chmod=+x ./install-pui
 call git add --chmod=+x ./i3py
 call git add --chmod=+x ./install-i3py
+call git add --chmod=+x ./pos-greeter
 
 call git add *
 

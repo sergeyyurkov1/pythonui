@@ -14,7 +14,7 @@ def main():
     def on_window_close(i3, e):
         tree = i3.get_tree()
 
-        if len(tree.find_classed("terminal")) == 0:
+        if len(tree.find_classed("Alacritty")) == 0:
             functions.log_to_txt("All terminal windows closed")
 
             i3.command("exec alacritty")

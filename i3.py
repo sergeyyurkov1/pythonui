@@ -1,4 +1,5 @@
 import i3ipc
+import pyperclip
 from i3ipc import Event
 
 import functions
@@ -7,8 +8,9 @@ import functions
 def main():
     def on_window_new(i3, e):
         if e.container.name == "Terminal":
-            functions.log_to_txt(e.container.name)
-            i3.command("exec pos-greeter")
+            # functions.log_to_txt(e.container.name)
+            pyperclip.copy("~/pythonui/pos-greeter.py\n")
+            pyperclip.paste()
 
     def on_window_close(i3, e):
         tree = i3.get_tree()

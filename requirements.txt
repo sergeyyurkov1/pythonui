@@ -6,3 +6,4 @@ textual-plotext
 ruamel.yaml
 psutil
 i3ipc
+pyperclip

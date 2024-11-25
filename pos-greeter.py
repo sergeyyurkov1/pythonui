@@ -19,7 +19,7 @@ text = """
 
 for e, line in enumerate(text.splitlines()):
     if e == 3:
-        table.add_row(line, style="on grey93")
+        table.add_row(line, style="grey93")
     else:
         table.add_row(line)
 

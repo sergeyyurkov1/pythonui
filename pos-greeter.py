@@ -1,7 +1,7 @@
-from rich import box, print
+from rich import print
 from rich.table import Table
 
-table = Table(box=box.MINIMAL)
+table = Table(box=None)
 
 table.add_column(style="on blue")
 

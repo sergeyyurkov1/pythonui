@@ -1,7 +1,7 @@
-from rich import print
+from rich import box, print
 from rich.table import Table
 
-table = Table(box=None)  # box=MINIMAL
+table = Table(box=box.MINIMAL)
 
 table.add_column(style="on blue")
 
@@ -17,10 +17,8 @@ text = """
 
 """
 
-for e, line in enumerate(text.splitlines()):
-    if e == 3:
-        table.add_row(line, style="on magenta")  # grey93
-    else:
-        table.add_row(line)
+for line in text.splitlines():
+    table.add_row(line)
 
 print(table)
+print("\n")

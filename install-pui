@@ -50,5 +50,9 @@ sed -i "s/i3-sensible-terminal/alacritty/" ~/.config/i3/config
 
 echo '[window]' > $HOME/.alacritty.toml
 echo 'dynamic_title = false' >> $HOME/.alacritty.toml
+echo '\n' >> $HOME/.alacritty.toml
+echo '[terminal.shell]' >> $HOME/.alacritty.toml
+echo 'program = "/bin/ash"' >> $HOME/.alacritty.toml
+echo 'args = ["-c", ". ~/pythonui/pos-greeter"]' >> $HOME/.alacritty.toml
 
 source ~/pythonui/install-i3py
